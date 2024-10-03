@@ -1,0 +1,18 @@
+version: "3.1"
+
+services:
+  stockbot:
+    container_name: stockbot
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APCA_API_KEY_ID: ${APCA_API_KEY_ID}
+        APCA_API_SECRET_KEY: ${APCA_API_SECRET_KEY}
+        APCA_API_BASE_URL: ${APCA_API_BASE_URL}
+    command: python3 stockbot.py -t moved -b buyatopen
+    environment:
+      - APCA_API_KEY_ID=${APCA_API_KEY_ID}
+      - APCA_API_SECRET_KEY=${APCA_API_SECRET_KEY}
+      - APCA_API_BASE_URL=${APCA_API_BASE_URL}
